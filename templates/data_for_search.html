@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block title %}Search records{% endblock %}
+{% block content %}
+    <h1 class="title">Introduce the key word to look for records in "CONTENT"</h1>
+
+    <form action="" method="post" name="record_search">
+      {{ form.csrf_token }}
+
+      <div class="field">
+        <label for="search" class="label">Key word</label>
+        <div class="control">
+          {{ form.search(required=True, autofocus=True, class='input') }}
+        </div>
+                
+      </div>
+
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-primary is-small">Search</button>
+        </div>
+      </div>
+    </form>
+{% endblock %}

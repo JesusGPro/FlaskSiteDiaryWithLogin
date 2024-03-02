@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>My Work Site Records - {% block title %}{% endblock %}</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css"/>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='looklike.css') }}"/>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar" aria-label="main navigation">
+        <div class="navbar-brand">
+          <span class="navbar-item">
+            <a class="button is-dark" href="{{ url_for('home_page') }}">Home</a>
+          </span>
+          {% if current_user.is_admin %}
+          <span class="navbar-item">
+            <a class="button is-success" href="{{ url_for('records_page') }}">Record List</a>
+          </span>
+          
+          <span class="navbar-item">
+            <a class="button is-primary" href="{{ url_for('record_add_page') }}">Add Record</a>
+          </span>
+          <span class="navbar-item">
+            <a class="button is-success" href="{{ url_for('sql_search') }}">SQL Search</a>
+          </span>
+          {% endif %}
+          <span class="navbar-item">
+          {% if not current_user.is_authenticated %}
+            <a class="button is-link" href="{{ url_for('login_page') }}">Log in</a>
+          {% else %}
+            {{ current_user.username }}
+            <a class="button is-link" href="{{ url_for('logout_page') }}">Log out</a>
+          {% endif %}
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      {% for message in get_flashed_messages() %}
+        <div class="notification is-info">{{ message }}</div>
+      {% endfor %}
+      <section class="section">
+        <div class="content">
+          {% block content %}{% endblock %}
+        </div>
+      </section>
+    </main>
+
+    <footer class='footer'>
+      <small>&copy; 2024, Jesus Maria Garcia Pro</small>
+    </footer>
+  </body>
+</html>

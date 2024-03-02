@@ -1,0 +1,16 @@
+DEBUG = True
+# PORT = 5000
+SECRET_KEY = 'secret'
+WTF_CSRF_ENABLED = True
+
+PASSWORDS = {
+    'USER_JGP': '$pbkdf2-sha256$29000$ppRybi3FGGPMWevde8.5tw$ZIOnNndXkRwhkZC4/geh44wXemv/6Xhn1ITOc/2iX1c',
+    'USER_RAGG': '$pbkdf2-sha256$29000$15pzLqX0PmdMSQkhxFjLmQ$jTUOIszxGZ7EtSj356FBKK/MAOR4Ux5OSfBjorLYf8M',
+    'USER_JGG': '$pbkdf2-sha256$29000$RgjhfK9Vytn7n/N.DwEA4A$IsHed1WZweRewr1MAB5Q9ka/9CQx2m0wbSBC8CZ.zFI',
+    'USER_RGG': '$pbkdf2-sha256$29000$kNL6v3cuBcD4f68VwljrvQ$ya90doI4jeBzuur6bTwbA/8KtGZJbQgte4kOgTMSj.A',
+    "USER_GENERIC": '$pbkdf2-sha256$29000$EcLYey/FuBdCKCVEyJkzBg$.6eu7z/XXGxlE4TIL/mRSHH33AFBv6gdW0A7QjVerwc',
+    
+}
+
+ADMIN_USERS = ["USER_GENERIC", "USER_JGP", 'USER_RAGG', 'USER_JGG', 'USER_RGG']
+

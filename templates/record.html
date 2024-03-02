@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block title %}Record{% endblock %}
+{% block content %}
+    <h1 class="title">Record</h1>
+
+    <table class="table">
+      <tr>
+        <th>Id:</th>
+        <td>{{ id }}</td>
+      </tr>
+      <tr>
+        <th>Title:</th>
+        <td>{{ record.title }}</td>
+      </tr>
+      {% if record.content %}
+      <tr>
+        <th>Content:</th>
+        <td>{{ record.content }}</td>
+      </tr>
+      {% endif %}
+      {% if record.date_recorded %}
+      <tr>
+        <th>Recorded at:</th>
+        <td>{{ record.date_recorded }}</td>
+      </tr>
+      {% endif %}
+    </table>
+
+    {% if current_user.is_authenticated %}
+    <div class="field is-grouped">
+        <div class="control">
+          <a class="button is-primary is-outlined is-small"
+             href="{{ request.path }}/edit">Edit</a>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}
