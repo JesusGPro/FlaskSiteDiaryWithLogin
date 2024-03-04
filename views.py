@@ -3,7 +3,7 @@ from datetime import date
 import database
 from datetime import datetime
 from record import Record
-from forms import RecordEditForm, LoginForm
+from forms import RecordEditForm, LoginForm, SearchForm
 from flask_login import login_user, logout_user, login_required, current_user
 from user import get_user
 from passlib.hash import pbkdf2_sha256 as hasher
@@ -64,7 +64,8 @@ def record_add_page():
     if not current_user.is_admin:
         abort(401)
     form = RecordEditForm()
-    if form.validate_on_submit():
+    if request.method == 'POST':
+    # if form.validate_on_submit():
         title = form.data["title"]
         content = form.data["content"]
         record = Record(title, content, fecha)
@@ -72,11 +73,13 @@ def record_add_page():
         return redirect(url_for("record_page", record_key=record_key))
     return render_template("record_edit.html", form=form)
 
+
 @login_required    
 def record_edit_page(record_key):
     record = database.get_record(record_key)[0]
     form = RecordEditForm()
-    if form.validate_on_submit():
+    if request.method == 'POST':
+    # if form.validate_on_submit():
         title = form.data["title"]
         content = form.data["content"]
         record = Record(title, content, fecha)
@@ -113,18 +116,37 @@ def sql_search():
     if not current_user.is_admin:
         abort(401)
     form = RecordEditForm()
-    # if form.validate_on_submit():
     if request.method == 'POST':
+    # if form.validate_on_submit():
         key_word = form.data["search"]
-        return redirect(url_for('search_result', word_h=key_word))
+        if key_word=="":
+            return render_template('home.html')
+        else:
+            return redirect(url_for('search_result', word_h=key_word))
     return render_template("data_for_search.html", form=form)
+
+
+@login_required 
+def basic_search():
+    if not current_user.is_admin:
+        abort(401)
+    form = SearchForm()
+    if request.method == 'POST':
+        key_word = form.searched.data
+        return redirect(url_for('basic_search_result', word_s=key_word))
+    return render_template("home.html")
 
 
 def search_result(word_h):
     records = database.get_sql_search(word_h)
     flash("Query send without errors")
-    return render_template("search_result.html", records=records)
+    return render_template("search_result_sql.html", len = len(records), records=records)
 
+def basic_search_result(word_s):
+    records = word_s
+    records = database.get_basic_search(word_s)
+    flash("Query send without errors")
+    return render_template("search_result_sql.html", len = len(records), records=records)
 
 
     

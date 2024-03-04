@@ -60,13 +60,23 @@ def get_records():
     return records
 
 def get_sql_search(key_word):
+    records = []
+    connection = sqlite3.connect("site_diary.db")
+    cursor = connection.cursor()
+    query = cursor.execute(f"{key_word}").fetchall()
+    
+    records = query
+    
+    connection.close()
+    return records
+
+
+def get_basic_search(key_word):
     table_name = str(session['username'])
     records = []
     connection = sqlite3.connect("site_diary.db")
     cursor = connection.cursor()
     query = cursor.execute(f"SELECT * FROM {table_name} WHERE CONTENT like '%{key_word}%' ORDER BY ID").fetchall()
-    for record_key, title, content, date_recorded in query:
-        records.append((record_key, Record(title, content, date_recorded)))
+    records = query
     connection.close()
     return records
-

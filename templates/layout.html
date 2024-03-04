@@ -33,9 +33,25 @@
             <a class="button is-link" href="{{ url_for('login_page') }}">Log in</a>
           {% else %}
             {{ current_user.username }}
-            <a class="button is-link" href="{{ url_for('logout_page') }}">Log out</a>
-          {% endif %}
+            <a class="button is-link" href="{{ url_for('logout_page') }} ">Log out</a>
+          {% endif %}         
         </div>
+        
+        <div class="field has-addons" style="padding-top:15px;">
+          <div class="control">
+            <form method = "POST" action="{{ url_for('basic_search')}}">
+            {{ form.search_b }}
+            <input class="input" type="search" placeholder="Search" aria-label="Search", name="searched">
+          </div>
+              <div class="control">
+                <button class="button is-info" type="submit">Search</button>
+              </div>
+            </form>
+        </div>
+        
+
+
+
       </nav>
     </header>
 

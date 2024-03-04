@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block title %}Records{% endblock %}
+{% block content %}
+
+    <h1 style="color: #d64161;" class="title">Records</h1>
+
+    {% if records %}
+    {% for i in range(len) %}
+        <p style="color: green;">{{i}} out of {{len}}:</p> <p>{{records[i]}}</p>
+        <br>
+    {% endfor %}
+    {% endif %}
+    
+{% endblock %}

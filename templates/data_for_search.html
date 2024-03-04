@@ -1,13 +1,23 @@
 {% extends "layout.html" %}
 {% block title %}Search records{% endblock %}
 {% block content %}
-    <h1 class="title">Introduce the key word to look for records in "CONTENT"</h1>
+
+
+    <h1 class="title">Introduce the SQL command to look for records</h1>
+    <h4>1) To look for a single word in any column introduce:</h4> 
+    <p>SELECT * FROM USER_JGP WHERE CONTENT LIKE '%gantry%' ORDER BY ID</p>
+    <h4>2) Looking in one field only, you have theree: ID, TITLE, CONTENT and DATE_TIME:</h4>
+        <p>SELECT CONTENT FROM USER_JGP WHERE CONTENT LIKE '%gantry%' ORDER BY ID</p>
+    <h4>3) Looking diferent words in one column, the column is CONTENT, you can pick a different one:</h4>
+        <p>SELECT * FROM USER_JGP WHERE CONTENT like '%C29%' and CONTENT like '%gantry%' and CONTENT like '%completed%'</p>
+    <h4>4) If you want to look for a date, introduce the date with "_" instead of "/", in the url will not work:</h4>
+        <p>SELECT * FROM USER_JGP WHERE TITLE like '%2024_02_03%' ORDER BY ID</p>
 
     <form action="" method="post" name="record_search">
       {{ form.csrf_token }}
 
       <div class="field">
-        <label for="search" class="label">Key word</label>
+        <label for="search" class="label">SQL instruction:</label>
         <div class="control">
           {{ form.search(required=True, autofocus=True, class='input') }}
         </div>
