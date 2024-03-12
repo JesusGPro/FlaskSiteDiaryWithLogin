@@ -148,5 +148,24 @@ def basic_search_result(word_s):
     flash("Query send without errors")
     return render_template("search_result_sql.html", len = len(records), records=records)
 
+@login_required    
+def export_to_excel():
+    import pandas as pd
+    from tkinter import filedialog
+    import sqlite3
+    
+    table_name = str(session['username'])
+    connection = sqlite3.connect("site_diary.db")
+    data_frame = pd.read_sql(f'SELECT ID, TITLE, CONTENT FROM {table_name}', connection)
+    try:
+        file_path = filedialog.asksaveasfilename(defaultextension=".xlsx", filetypes=[("Spreadsheet files", "*.xlsx"), ("All files", "*.*")])
+        data_frame.to_excel(file_path, index=False)  
+        flash("Excel file record successfully")
+    except:
+        return render_template('home.html')
+       
+    return render_template('home.html')
+
+
 
     

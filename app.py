@@ -34,7 +34,7 @@ def create_app():
     app.add_url_rule("/basic_search/", view_func=views.home_page, methods=['GET', 'POST'])
     app.add_url_rule("/basic_search/<word_s>", view_func=views.basic_search_result, methods=['POST', 'GET'])
     #---------------------------------------------------------------------------------------   
-           
+    app.add_url_rule("/export_to_excel", view_func=views.export_to_excel)       
     
     lm.init_app(app)
     lm.login_view = "login_page"

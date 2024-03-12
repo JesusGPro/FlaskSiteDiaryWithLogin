@@ -46,7 +46,8 @@ def get_record(record_key):
     record_ =Record(title, content, date_recorded)
     connection.close()
     return record_, id
-   
+
+  
     
 def get_records():
     table_name = str(session['username'])
@@ -80,3 +81,9 @@ def get_basic_search(key_word):
     records = query
     connection.close()
     return records
+
+
+    
+    
+
+        

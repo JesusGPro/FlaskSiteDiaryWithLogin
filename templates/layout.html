@@ -27,6 +27,9 @@
           <span class="navbar-item">
             <a class="button is-success" href="{{ url_for('sql_search') }}">SQL Search</a>
           </span>
+          <span class="navbar-item">
+            <a class="button is-success" href="{{ url_for('export_to_excel') }}">Export to excel</a>
+          </span>
           {% endif %}
           <span class="navbar-item">
           {% if not current_user.is_authenticated %}
@@ -36,22 +39,16 @@
             <a class="button is-link" href="{{ url_for('logout_page') }} ">Log out</a>
           {% endif %}         
         </div>
-        
-        <div class="field has-addons" style="padding-top:15px;">
+        <div class="field has-addons" style="padding-top: 15px;">
           <div class="control">
             <form method = "POST" action="{{ url_for('basic_search')}}">
-            {{ form.search_b }}
-            <input class="input" type="search" placeholder="Search" aria-label="Search", name="searched">
+                <input class="input" type="search" placeholder="Search" aria-label="Search", name="searched">
           </div>
-              <div class="control">
+          <div class="control">
                 <button class="button is-info" type="submit">Search</button>
-              </div>
+          </div>  
             </form>
         </div>
-        
-
-
-
       </nav>
     </header>
 
